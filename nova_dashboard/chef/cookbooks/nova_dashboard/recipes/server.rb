@@ -115,12 +115,22 @@ apache_site "nova-dashboard.conf" do
   enable true
 end
 
+# Add a virtualhost entry in ports.conf if it doesn't exist
+Chef::Log.info(">>>>>> Nova Dashboard: Add horizon virtual host entry in ports.conf ")
+ports_conf_file = "/etc/apache2/ports.conf"
+execute "add horizon virtual host command" do
+  command "printf '\nListen #{my_ipaddress}:80\nNameVirtualHost #{my_ipaddress}:80' >> #{ports_conf_file}"
+  not_if "grep #{my_ipaddress}:80 #{ports_conf_file}"
+end
+ 
+
+
 # Setting the common password in create_proposal in nova_dashboard_service.rb so that all nodes get the same password
 node.set['dashboard']['db']['password'] = node[:nova_dashboard][:db][:password]
 Chef::Log.info(">>>>>> Nova Dashboard: node[:dashboard][:db][:password] : #{node[:dashboard][:db][:password]}")
 
 ######################## DATABASE OPERATIONS #################################
-Chef::Log.info(">>>>>> Nova Dashboard: Common Recipe: Database operations")
+Chef::Log.info(">>>>>> Nova Dashboard: Database operations")
 
 
 
@@ -158,14 +168,6 @@ django_db_backend = "'django.db.backends.mysql'"
 database_address = admin_vip
 Chef::Log.info(">>>>>> Nova Dashboard: database_address : #{database_address}")
 
-#db_settings = {
-#      'ENGINE' => django_db_backend,
-#      'NAME' => "'##{node[:dashboard][:db][:database]}'",
-#      'USER' => "'##{node[:dashboard][:db][:user]}'",
-#      'PASSWORD' => "'##{node[:dashboard][:db][:password]}'",
-#      'HOST' => "'##{database_address}'",
-#      'default-character-set' => "'utf8'"
-#    }
 
 db_settings = {
       'ENGINE' => django_db_backend,
