@@ -32,7 +32,7 @@
       ],
       "use_gitrepo": false,
       "db": {
-        "password": "",
+        "password": ""
       }
     }
   },

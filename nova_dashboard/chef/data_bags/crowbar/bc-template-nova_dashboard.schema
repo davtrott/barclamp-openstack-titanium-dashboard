@@ -30,7 +30,8 @@
               "mapping": {
                 "password": { "type": "str", "required": true }
               }
-          }
+           }  
+         }
         }
       }
     },
