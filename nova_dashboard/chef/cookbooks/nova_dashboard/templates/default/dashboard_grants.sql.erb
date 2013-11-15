@@ -1,4 +1,4 @@
 CREATE DATABASE IF NOT EXISTS <%= @dashboard_db_name %>;
 GRANT ALL ON <%= @dashboard_db_name %>.* TO '<%= @dashboard_db_user %>'@'%' IDENTIFIED BY '<%= @dashboard_db_user_pwd %>';
-GRANT ALL ON <%= @dashbaord_db_name %>.* TO '<%= @dashboard_db_user %>'@'localhost' IDENTIFIED BY '<%= @dashboard_db_user_pwd %>';
+GRANT ALL ON <%= @dashboard_db_name %>.* TO '<%= @dashboard_db_user %>'@'localhost' IDENTIFIED BY '<%= @dashboard_db_user_pwd %>';
 FLUSH PRIVILEGES;
