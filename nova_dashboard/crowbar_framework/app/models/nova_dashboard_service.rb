@@ -127,7 +127,7 @@ class NovaDashboardService < ServiceObject
     end
 
 		#Common Password for all nodes - instead of in server.rb
-    base["attributes"]["dashboard"]["db"]["password"] = secure_password
+    base["attributes"]["nova_dashboard"]["db"]["password"] = random_password
 		
     @logger.debug("Nova_dashboard create_proposal: exiting")
     base
