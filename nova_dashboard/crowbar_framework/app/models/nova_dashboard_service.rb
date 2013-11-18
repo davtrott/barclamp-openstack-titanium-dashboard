@@ -126,7 +126,7 @@ class NovaDashboardService < ServiceObject
       @logger.info("#{@bc_name} create_proposal: no git found")
     end
 
-		#Common Password for all nodes - instead of in server.rb
+	#Common Password for all nodes - instead of in server.rb
     base["attributes"]["nova_dashboard"]["db"]["password"] = random_password
 		
     @logger.debug("Nova_dashboard create_proposal: exiting")
