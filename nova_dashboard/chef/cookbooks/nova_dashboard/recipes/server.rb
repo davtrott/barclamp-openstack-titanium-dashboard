@@ -110,7 +110,9 @@ apache_site "nova-dashboard.conf" do
   enable true
 end
 
-node.set_unless['dashboard']['db']['password'] = secure_password
+# Setting the common password in create_proposal in nova_dashboard_service.rb so that all nodes get the same password
+node.set['dashboard']['db']['password'] = node[:nova_dashboard][:db][:password]
+Chef::Log.info(">>>>>> Nova Dashboard: node[:dashboard][:db][:password] : #{node[:dashboard][:db][:password]}")
 
 ######################## DATABASE OPERATIONS #################################
 Chef::Log.info(">>>>>> Nova Dashboard: Common Recipe: Database operations")

@@ -30,7 +30,10 @@
         "pip://python-quantumclient>=2.0",
         "pip://pytz"
       ],
-      "use_gitrepo": false
+      "use_gitrepo": false,
+      "db": {
+        "password": "",
+      }
     }
   },
   "deployment": {
