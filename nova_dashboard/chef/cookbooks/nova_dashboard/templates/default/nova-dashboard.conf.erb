@@ -1,4 +1,4 @@
-<VirtualHost <%= @my_ipaddress %>:81>
+<VirtualHost <%= @my_ipaddress %>:80>
     WSGIDaemonProcess horizon user=www-data group=www-data processes=3 threads=10 home=<%= @horizon_dir %> 
 <% if @venv -%>
     WSGIScriptAlias / <%= @horizon_dir %>/openstack_dashboard/wsgi/django_venv.wsgi
@@ -10,7 +10,7 @@
     WSGIProcessGroup horizon
 
     DocumentRoot <%= @horizon_dir %>/.blackhole/
-    Alias /media <%= @horizon_dir %>/openstack_dashboard/static
+    Alias /media <%= @horizon_dir %>/openstack_dashboard/static	
 
     <Directory />
         Options FollowSymLinks
