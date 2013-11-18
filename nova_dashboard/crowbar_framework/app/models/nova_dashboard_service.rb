@@ -27,14 +27,14 @@ class NovaDashboardService < ServiceObject
 
   def proposal_dependencies(role)
     answer = []
-    if role.default_attributes["nova_dashboard"]["database_engine"] == "database"
-      answer << { "barclamp" => "database", "inst" => role.default_attributes["nova_dashboard"]["database_instance"] }
-    end
+#    if role.default_attributes["nova_dashboard"]["database_engine"] == "database"
+#      answer << { "barclamp" => "database", "inst" => role.default_attributes["nova_dashboard"]["database_instance"] }
+#    end
     if role.default_attributes[@bc_name]["use_gitrepo"]
       answer << { "barclamp" => "git", "inst" => role.default_attributes[@bc_name]["git_instance"] }
     end
     answer << { "barclamp" => "keystone", "inst" => role.default_attributes["nova_dashboard"]["keystone_instance"] }
-    answer << { "barclamp" => "nova", "inst" => role.default_attributes["nova_dashboard"]["nova_instance"] }
+#   answer << { "barclamp" => "nova", "inst" => role.default_attributes["nova_dashboard"]["nova_instance"] }
     answer
   end
 
@@ -73,9 +73,9 @@ class NovaDashboardService < ServiceObject
 
     # SQLite is not a fallback solution
     # base["attributes"]["nova_dashboard"]["database_engine"] = "sqlite" if base["attributes"]["nova_dashboard"]["database_engine"] == ""
-    if base["attributes"]["nova_dashboard"]["database_engine"] == ""
-      raise(I18n.t('model.service.dependency_missing', :name => @bc_name, :dependson => "database"))
-    end
+#    if base["attributes"]["nova_dashboard"]["database_engine"] == ""
+#      raise(I18n.t('model.service.dependency_missing', :name => @bc_name, :dependson => "database"))
+#    end
 
     base["attributes"]["nova_dashboard"]["keystone_instance"] = ""
     begin
@@ -107,9 +107,9 @@ class NovaDashboardService < ServiceObject
       @logger.info("Nova dashboard create_proposal: no nova found")
     end
 
-    if base["attributes"]["nova_dashboard"]["nova_instance"] == ""
-      raise(I18n.t('model.service.dependency_missing', :name => @bc_name, :dependson => "nova"))
-    end
+#    if base["attributes"]["nova_dashboard"]["nova_instance"] == ""
+#      raise(I18n.t('model.service.dependency_missing', :name => @bc_name, :dependson => "nova"))
+#    end
 
     base["attributes"][@bc_name]["git_instance"] = ""
     begin
