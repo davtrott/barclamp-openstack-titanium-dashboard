@@ -1,0 +1,56 @@
+{
+  "id": "bc-template-nova_dashboard",
+  "description": "User Interface for OpenStack projects (code name Horizon)",
+  "attributes": {
+    "nova_dashboard": {
+      "database_engine": "database",
+      "nova_instance": "none",
+      "keystone_instance": "none",
+      "database_instance": "none",
+      "gitrepo": "http://github.com/openstack/horizon.git",
+      "git_instance": "",
+      "git_refspec": "stable/grizzly",
+      "use_gitbarclamp": false,
+      "use_pip_cache": false,
+      "use_virtualenv": false,
+      "pfs_deps": [
+        "nodejs",
+        "apache2",
+        "libapache2-mod-wsgi",
+        "python-netaddr",
+        "python-lockfile",
+        "pip://warlock<2",
+        "pip://django>=1.4",
+        "pip://django_compressor",
+        "pip://django_openstack_auth",
+        "pip://python-cinderclient",
+        "pip://python-glanceclient<2",
+        "pip://python-keystoneclient",
+        "pip://python-novaclient",
+        "pip://python-quantumclient>=2.0",
+        "pip://pytz"
+      ],
+      "use_gitrepo": false
+    }
+  },
+  "deployment": {
+    "nova_dashboard": {
+      "crowbar-revision": 0,
+      "element_states": {
+        "nova_dashboard-server": [ "readying", "ready", "applying" ]
+      },
+      "elements": {},
+      "element_order": [
+        [ "nova_dashboard-server" ]
+      ],
+      "config": {
+        "environment": "nova_dashboard-base-config",
+        "mode": "full",
+        "transitions": false,
+        "transition_list": [
+        ]
+      }
+    }
+  }
+}
+
