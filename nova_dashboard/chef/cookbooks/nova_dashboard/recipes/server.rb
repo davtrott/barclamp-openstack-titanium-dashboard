@@ -154,14 +154,24 @@ django_db_backend = "'django.db.backends.mysql'"
 database_address = admin_vip
 Chef::Log.info(">>>>>> Nova Dashboard: database_address : #{database_address}")
 
+#db_settings = {
+#      'ENGINE' => django_db_backend,
+#      'NAME' => "'##{node[:dashboard][:db][:database]}'",
+#      'USER' => "'##{node[:dashboard][:db][:user]}'",
+#      'PASSWORD' => "'##{node[:dashboard][:db][:password]}'",
+#      'HOST' => "'##{database_address}'",
+#      'default-character-set' => "'utf8'"
+#    }
+
 db_settings = {
       'ENGINE' => django_db_backend,
-      'NAME' => "'##{node[:dashboard][:db][:database]}'",
-      'USER' => "'##{node[:dashboard][:db][:user]}'",
-      'PASSWORD' => "'##{node[:dashboard][:db][:password]}'",
-      'HOST' => "'##{database_address}'",
+      'NAME' => "'#{node[:dashboard][:db][:database]}'",
+      'USER' => "'#{node[:dashboard][:db][:user]}'",
+      'PASSWORD' => "'#{node[:dashboard][:db][:password]}'",
+      'HOST' => "'#{database_address}'",
       'default-character-set' => "'utf8'"
     }
+
 
 ############################################################################
 
