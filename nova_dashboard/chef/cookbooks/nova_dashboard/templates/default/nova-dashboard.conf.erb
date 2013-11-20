@@ -1,4 +1,4 @@
-<VirtualHost *:80>
+<VirtualHost <%= @my_ipaddress %>:81>
     WSGIDaemonProcess horizon user=www-data group=www-data processes=3 threads=10 home=<%= @horizon_dir %> 
 <% if @venv -%>
     WSGIScriptAlias / <%= @horizon_dir %>/openstack_dashboard/wsgi/django_venv.wsgi

@@ -79,13 +79,18 @@ apache_site "000-default" do
   enable false
 end
 
+
+# Get Actual IP of the current node
+my_ipaddress = Chef::Recipe::Barclamp::Inventory.get_network_by_type(node, "admin").address
+
 template "#{node[:apache][:dir]}/sites-available/nova-dashboard.conf" do
   source "nova-dashboard.conf.erb"
   mode 0644
   variables(
     :horizon_dir => dashboard_path,
     :venv => node[:nova_dashboard][:use_virtualenv],
-    :venv_path => venv_path
+    :venv_path => venv_path,
+		:my_ipaddress => my_ipaddress
   )
   if ::File.symlink?("#{node[:apache][:dir]}/sites-enabled/nova-dashboard.conf")
     notifies :reload, resources(:service => "apache2")
@@ -117,9 +122,6 @@ Chef::Log.info(">>>>>> Nova Dashboard: node[:dashboard][:db][:password] : #{node
 ######################## DATABASE OPERATIONS #################################
 Chef::Log.info(">>>>>> Nova Dashboard: Common Recipe: Database operations")
 
-# Make sure we use the admin node for now.
-##DT Get Actual IP of the current node
-my_ipaddress = Chef::Recipe::Barclamp::Inventory.get_network_by_type(node, "admin").address
 
 
 Chef::Log.info(">>>>>> Nova Dashboard: bind ip address : #{my_ipaddress}")
